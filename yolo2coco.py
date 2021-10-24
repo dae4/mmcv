@@ -11,11 +11,11 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
     category_list = []
     ## classes = ['food','cup','product','plate','bowl','foodtray','container']
     class_0 = {
-            'id':  0,
-            'name' : 'food',
-            'supercategory' : 'None'
+            "id":  0,
+            "name" : "food",
+            "supercategory" : "None"
             }
-    for i in range(7):
+    for i in range(1):
         category_list.append(f"class_{i}")
 
     '''
@@ -43,14 +43,14 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
     for image_name in image_list :
         img = cv2.imread(image_dir_path+image_name)
         image_dict = {
-                'id' : count,
-                'file_name' : image_name,
-                'width' : img.shape[1],
-                'height' : img.shape[0],
-                'date_captured' : '2021-10-23',
-                'license' : 1, # put correct license
-                'coco_url' : '',
-                'flickr_url' : ''
+                "id" : count,
+                "file_name" : image_name,
+                "width" : img.shape[1],
+                "height" : img.shape[0],
+                "date_captured" : "2021-10-23",
+                "license" : 1, # put correct license
+                "coco_url" : "",
+                "flickr_url" : ""
                 }
         image_dict_list.append(image_dict)
         count += 1
@@ -73,7 +73,7 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
             line = label.readline()
             if not line:
                 break
-            class_number, center_x,center_y,box_width,box_height,rotate = line.split()
+            class_number, center_x,center_y,box_width,box_height = line.split()
             # should put bbox x,y,width,height
             # bbox x,y is top left
 
@@ -113,13 +113,13 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
             segmentation_list_list.append(segmentation_list)
 
             label_dict = {
-                    'id' : label_count,
-                    'image_id' : image_count,
-                    'category_id' : int(class_number)+1,
-                    'iscrowd' : 0,
-                    'area' : int(bbox_dict[2] * bbox_dict[3]),
-                    'bbox' : bbox_dict,
-                    'segmentation' : segmentation_list_list
+                    "id" : label_count,
+                    "image_id" : image_count,
+                    "category_id" : int(class_number)+1,
+                    "iscrowd" : 0,
+                    "area" : int(bbox_dict[2] * bbox_dict[3]),
+                    "bbox" : bbox_dict,
+                    "segmentation" : segmentation_list_list
                     }
             label_dict_list.append(label_dict)
             label_count += 1
@@ -132,10 +132,10 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
         json.dump(total,make_file, ensure_ascii=False,indent='\t')
 
 if __name__ == '__main__':
-    data_root = '/disk2/daehan/v5/OD/'
-    image_dir_path = data_root+'images/train_v3/'
-    label_dir_path = data_root+'labels/train_v3/'
-    save_file_name = 'train.json'
+    data_root = '/home/daehan/project/mmcv/data/yolo_torch/'
+    image_dir_path = data_root+'images/val/'
+    label_dir_path = data_root+'labels/val/'
+    save_file_name = '/home/daehan/project/mmcv/data/yolo_torch/labels/yolo_val.json'
     is_normalized = False
  
     yolo2coco(image_dir_path, label_dir_path, save_file_name,is_normalized)
