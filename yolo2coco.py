@@ -11,7 +11,7 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
     category_list = []
     ## classes = ['food','cup','product','plate','bowl','foodtray','container']
     class_0 = {
-            "id":  0,
+            "id":  1,
             "name" : "food",
             "supercategory" : "None"
             }
@@ -132,10 +132,10 @@ def yolo2coco(image_dir_path, label_dir_path,save_file_name , is_normalized):
         json.dump(total,make_file, ensure_ascii=False,indent='\t')
 
 if __name__ == '__main__':
-    data_root = '/home/daehan/project/mmcv/data/yolo_torch/'
+    data_root = '/home/daehan/project/mmcv/mmdetection/data/'
     image_dir_path = data_root+'images/val/'
     label_dir_path = data_root+'labels/val/'
-    save_file_name = '/home/daehan/project/mmcv/data/yolo_torch/labels/yolo_val.json'
-    is_normalized = False
+    save_file_name = '/home/daehan/project/mmcv/mmdetection/data/val.json'
+    is_normalized = True
  
     yolo2coco(image_dir_path, label_dir_path, save_file_name,is_normalized)
