@@ -3,8 +3,11 @@ mmcv
 
 
 train
+single gpu
+    python tools/train.py configs/yolact/yolact_r101_1x8_food.py 
 
-./tools/dist_train.sh configs/yolact/yolact_r101_1x8_food.py 1
+multi gpu
+    ./tools/dist_train.sh configs/yolact/yolact_r101_1x8_food.py 1
 
 use custom_data
 
