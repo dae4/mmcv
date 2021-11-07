@@ -1,4 +1,4 @@
-#%%
+import os
 from pycocotools.coco import COCO
 import numpy as np
 import skimage.io as io
@@ -15,11 +15,14 @@ def getClassName(classID, cats):
             return cats[i]['name']
     return "None"
 
+if not os.path.exists(dataDir+'mask'):
+    os.mkdir(dataDir+'mask')
+    os.mkdir(dataDir+'mask/{}'.format(dataType))
+
+
 filterClasses = ['food']
-#%%
 # Fetch class IDs only corresponding to the filterClasses
 catIds = coco.getCatIds(catNms=filterClasses)
-print(catIds) 
 # Get all images containing the above Category IDs
 imgIds = coco.getImgIds(catIds=catIds)
 print("Number of images containing all the  classes:", len(imgIds))
