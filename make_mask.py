@@ -19,7 +19,6 @@ if not os.path.exists(dataDir+'mask'):
     os.mkdir(dataDir+'mask')
     os.mkdir(dataDir+'mask/{}'.format(dataType))
 
-
 filterClasses = ['food']
 # Fetch class IDs only corresponding to the filterClasses
 catIds = coco.getCatIds(catNms=filterClasses)
@@ -36,4 +35,3 @@ for i in imgIds:
     for i in range(len(anns)):
         mask += coco.annToMask(anns[i])
     plt.imsave(dataDir+'masks/'+'{}/'.format(dataType)+img['file_name'],mask)
-# %%
